@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+    
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title" data-number="100">Card title</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <p class="card-text" data-number="50">
+                Some quick example text to build on the card title and make up the bulk of the card's
+                content.
+            </p>
+            <a href="#" id="super_link" class="card-link">Card link</a>
+            <a href="#" class="card-link" data-number="50">Another link</a>
+        </div>
+    </div>
+
+    <div class="playStart"></div>
+
+    <div >
+        <h1 style="color: blue">Список задач</h1>
+        <div class="purposeList">
+
+        </div>
+        <div class="result"></div>
+    </div>
+    <script>
+        "use strict";
+    </script>
+    
+    
+    <script>
+    console.log('Задача 1. Найти по id, используя getElementById, элемент с id равным "super_link" и вывести этот элемент в консоль.');
+
+    const superLinkEl = document.getElementById('super_link');
+        console.log(superLinkEl);
+        console.log();
+
+    console.log('Задача 2. Внутри всех элементов на странице, которые имеют класс "card-link", поменяйте текст внутри элемента на "ссылка');
+
+    // [].forEach.call(document.querySelectorAll('.card-link'), function(e){
+    //     e.innerHTML = 'ссылка'
+    // });
+
+    console.log('Задача 2. Через массив');
+
+    let arr = [];
+        const cardLinkEl = document.querySelectorAll('.card-link');
+        arr = Array.from(cardLinkEl);
+        console.log(arr);
+        for (let i = 0; i < arr.length; i++) {
+            arr[i].textContent = 'ссылка';
+        };
+
+    console.log();
+
+        console.log('Задача 3. Найти все элементы на странице с классом "card-link", которые лежат в элементе с классом "card-body" и вывести полученную коллекцию в консоль');
+
+        let arrCard = [];
+            const cardBodyLinkEl = document.querySelectorAll('.card-body .card-link');
+            arrCard = Array.from(cardBodyLinkEl);
+            console.log(arrCard);
+
+        console.log();
+
+        console.log('Задача 4. Найти первый попавшийся элемент на странице у которого есть атрибут data-number со значением 50 и вывести его в консоль');
+
+        const dataNumEl = document.querySelector('[data-number="50"]');
+        console.log(dataNumEl);
+
+        console.log();
+
+        console.log('Задача 5. Выведите содержимое тега title в консоль');
+
+        const titleEl = document.querySelector('title');
+        console.log(titleEl.innerHTML);
+
+        console.log(); 
+        
+        console.log('Задача 6. Получите элемент с классом "card-title" и выведите его родительский узел в консоль');
+
+        const cardTitleEl = document.querySelector('.card-title');
+        console.log(cardTitleEl.parentNode);
+
+        console.log(); 
+
+        console.log('7. Создайте тег p, запишите внутри него текст "Привет" и добавьте созданный тег в начало элемента, который имеет класс "card"'); 
+
+        const pEl = document.createElement('p');
+        pEl.textContent = 'Привет';
+        const cardEl = document.querySelector('.card');
+        cardEl.appendChild(pEl);
+
+        console.log(); 
+
+        console.log('8. Удалите тег h6 на странице'); 
+        
+        const h6El = document.querySelector('h6');
+        h6El.remove();
+
+        console.log(); 
+
+        console.log('9. Создайте мини приложение "Гадалку".Пользователю отображается кнопка "Предсказать" и при клике на кнопку из массива с текстами предсказаний должно отобразиться случайное предсказание'); 
+
+        const arrEl = ["Сегодня будет хорошая погода", "Завтра будет солнечно", "После завтра будет дождь", "Через неделю пойдет дождь", "В конце недели будет очень жарко", "В следующем месяце будет очень холодно", "Лето будет теплым", "Осенью будет мало дождей"];
+
+
+        function getRandomInt(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            const buttonPlayEl = document.createElement('button');
+            buttonPlayEl.textContent = 'Предсказать';
+            const playEl = document.querySelector('.playStart');
+            playEl.appendChild(buttonPlayEl);
+
+
+            buttonPlayEl.addEventListener('click', function (e) {
+                const pContentText = document.createElement('p');
+                pContentText.textContent = arrEl[getRandomInt(0, 9)];
+                playEl.replaceChildren();
+                playEl.appendChild(pContentText);
+
+});
+
+console.log(); 
+
+console.log('Задача 10. Создайте мини приложение "Список целей". Пользователю отображается поле ввода и кнопка добавить. При клике на кнопку "Добавить" берем текст из поля ввода и добавляем в список целей новую цель. Если интересно, можете сохранять список целей в localStorage'); 
+
+
+let inputEl = document.createElement('input');
+const El = document.createElement('button');
+El.textContent = 'Добавить цель в список';
+
+            const listEl = document.querySelector('.purposeList');
+            listEl.appendChild(inputEl);
+            listEl.appendChild(El);
+
+            El.addEventListener('click', function () {
+            let pUserText = document.createElement('p');
+                let resultEl = document.querySelector('.result');
+                pUserText.textContent = inputEl.value;
+               
+                //playEl.replaceChildren();
+                resultEl.appendChild(pUserText);
+
+});
+      
+
+    </script>
+</body>
+</html>
